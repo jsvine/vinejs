@@ -42,7 +42,7 @@
 
 			$selector.change(function (e) {
 				var query = $selector.val();
-				var search = new VineJS.Search(query, function () {
+				var search = new Vine.Search(query, function () {
 					var $iframes = $.map(this.results.slice(0,9), function (r) {
 						return $("<iframe src='" + r.card + "'></iframe>");
 					});
