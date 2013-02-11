@@ -23,22 +23,9 @@
 		callback: undefined
 	};
 
-	// Helper function
-	var _extend = function (obj) {
-		var rest = Array.prototype.slice.call(arguments, 1);
-		var source;
-		for (var i = 0; i < rest.length; i++) {
-			source = rest[i];
-			for (var prop in source) {
-				obj[prop] = source[prop];
-			}
-		}
-		return obj;
-	};
-
 	// Main search-via-Twitter constructor
-	var Search = function (opts) {
-		this.search_params = _extend({}, DEFAULTS, opts);
+	var Search = function (opts, callback) {
+		this.search_params = $.extend({}, DEFAULTS, opts);
 	};
 
 	VineJS.Search = Search;
@@ -53,4 +40,4 @@
 	} else {
 		root.VineJS = VineJS;
 	}
-}).call(this);
+}).call(this, jQuery);
