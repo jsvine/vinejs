@@ -1,7 +1,9 @@
 (function () {
 	var root = this;
 
-	var VineJS = {};
+	var VineJS = {
+		VERSION: 0.0.1	
+	};
 
 	var VINE_PATH = "vine.co/v/";
 
