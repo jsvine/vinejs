@@ -1,7 +1,8 @@
 (function ($) {
 	var root = this;
+	var previousVine = root.Vine;
 
-	var VineJS = {
+	var Vine = {
 		VERSION: "0.0.1"
 	};
 
@@ -93,17 +94,23 @@
 	};
 
 	// Attach Result and Search constructors to the main namespace.
-	VineJS.Result = Result;
-	VineJS.Search = Search;
+	Vine.Result = Result;
+	Vine.Search = Search;
 
-	// Export VineJS for either Node.js or the browser.
+	// noConflict method reverts the global `Vine` variable to its previous state and returns a reference to `Vine`, to be assigned to another variable.
+	Vine.noConflict = function () {
+		root.Vine = previousVine;
+		return Vine;
+	};
+
+	// Export Vine for either Node.js or the browser.
 	// Code borrowed from underscore.js
 	if (typeof exports !== 'undefined') {
 		if (typeof module !== 'undefined' && module.exports) {
-			exports = module.exports = VineJS;
+			exports = module.exports = Vine;
 		}
-		exports.VineJS = VineJS;
+		exports.Vine = Vine;
 	} else {
-		root.VineJS = VineJS;
+		root.Vine = Vine;
 	}
 }).call(this, this.jQuery || require("jquery"));
