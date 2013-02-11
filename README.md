@@ -7,7 +7,7 @@ Because Vine.co doesn't currently have an API, vine.js searches the Twitter API 
 
 ## Usage
 
-Vine.js should work in both the browser and Node.js. In both cases, the library depends on jQuery.
+Vine.js should work in both the browser and Node.js. In either case, the library depends on jQuery.
 
 In the browser:
 
@@ -18,13 +18,13 @@ In the browser:
 In Node.js:
 
 ```
-var VineJS = require("./vine.js");
+var Vine = require("./vine.js");
 ```
 
 And then, to use in either:
 
 ```
-var search = new VineJS.Search("#cats");
+var search = new Vine.Search("#cats");
 var search.fetch(function () {
 	console.log(this.results);
 });
@@ -33,11 +33,11 @@ var search.fetch(function () {
 You can also use the shorthand:
 
 ```
-var search = new VineJS.Search("#cats", function () {
+var search = new Vine.Search("#cats", function () {
 	console.log(this.results);
 });
 ```
 
 ## Thanks
 
-Thanks to Michael Keller (@mhkeller) and Kate Ray (@kraykray), who independently both suggested I make this library. They were joking; this is semi-serious.
+Thanks to [Michael Keller](http://twitter.com/@mhkeller) and [Kate Ray](http://twitter.com/kraykray), who independently both suggested I make this library. They were joking; this is semi-serious.
