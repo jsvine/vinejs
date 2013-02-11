@@ -40,4 +40,4 @@
 	} else {
 		root.VineJS = VineJS;
 	}
-}).call(this, jQuery);
+}).call(this, this.jQuery || require("jquery"));
