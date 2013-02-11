@@ -43,5 +43,14 @@
 
 	VineJS.Search = Search;
 
-	root.VineJS = VineJS;
+	// Export VineJS for either Node.js or the browser.
+	// Code borrowed from underscore.js
+	if (typeof exports !== 'undefined') {
+		if (typeof module !== 'undefined' && module.exports) {
+			exports = module.exports = VineJS;
+		}
+		exports.VineJS = VineJS;
+	} else {
+		root.VineJS = VineJS;
+	}
 }).call(this);
