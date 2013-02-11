@@ -12,7 +12,7 @@
 	// https://dev.twitter.com/docs/api/1/get/search
 	var DEFAULTS = {
 		q: VINE_PATH,
-		callback: "?",
+		callback: undefined,
 		geocode: undefined,
 		lang: undefined,
 		locale: undefined,
@@ -52,8 +52,8 @@
 
 	// Main search-via-Twitter constructor
 	var Search = function (opts, success, error) {
-		var _this = this;
-		
+		this.opts = opts;
+
 		// If opts is passed as a string, just query that string.
 		// Else set opts to itself or an empty object.
 		opts = toString.call(opts) == "[object String]" ? { q: opts } : (opts || {});
@@ -65,20 +65,31 @@
 
 		// Construct search parameters from defaults and custom options.
 		this.search_params = $.extend({}, DEFAULTS, opts);
-
-		// Request JSON from Twitter API
-		$.getJSON(TWITTER_ENDPOINT, this.search_params)
-			// Create results objects and pass them to the success function.
-			.success(function (data) {
-				_this.raw = data;
-				// Note: $.map auto-compacts null/undefined array elements. So if Result.parse returns null -- which it does if it can't find a vine.co/v/ URL in a tweet -- then this.results will be shorter than this.raw.results.
-				_this.results = $.map(data.results, function (result) {
-					return new Result(result).parse();
-				});
-				success.call(_this);
-			})
-			.error(error);
+		if (success) {
+			this.fetch(success, error);
+		}
 		return this;
+	};
+
+	Search.prototype = {
+		fetch: function (success, error) {
+			var _this = this;
+
+			var use_jsonp = root.location ? true : false;
+			// Request JSON from Twitter API
+			$.getJSON(TWITTER_ENDPOINT + (use_jsonp ? "?callback=?" : ""), this.search_params)
+				// Create results objects and pass them to the success function.
+				.success(function (data) {
+					_this.raw = data;
+					// Note: $.map auto-compacts null/undefined array elements. So if Result.parse returns null -- which it does if it can't find a vine.co/v/ URL in a tweet -- then this.results will be shorter than this.raw.results.
+					_this.results = $.map(data.results, function (result) {
+						return new Result(result).parse();
+					});
+					success.call(_this);
+				})
+				.error(error);
+			return this;
+		}
 	};
 
 	// Attach Result and Search constructors to the main namespace.
