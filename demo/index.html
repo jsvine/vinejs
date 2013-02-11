@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Vine.js Demo</title>
+		<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA1BMVEV/y+Bw0/5KAAAADElEQVQImWNgIA0AAAAwAAFDlLdnAAAAAElFTkSuQmCC" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<style>
+			#chooser select {
+				display: block;
+				margin: 0 auto;	
+			}
+			#main {
+				overflow: auto;
+				max-width: 600px;
+				margin: 0 auto;
+			}
+			iframe {
+				padding: 10px;
+				float: left;
+				width: 180px;
+				height: 180px;
+				border: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="chooser">
+			<select>
+				<option val="#cats">#cats</option>
+				<option val="#dogs">#dogs</option>
+				<option val="#cats OR #dogs">#cats OR #dogs</option>
+			</select>
+		</div>
+		<div id="main"></div>
+
+		<script src="../vine.js"></script>
+		<script>
+		(function () {
+			var $main = $("#main");
+			var $selector = $("#chooser select");
+
+			$selector.change(function (e) {
+				var query = $selector.val();
+				var search = new VineJS.Search(query, function () {
+					var $iframes = $.map(this.results.slice(0,9), function (r) {
+						return $("<iframe src='" + r.card + "'></iframe>");
+					});
+					$main.html($iframes);
+				});
+			}).change();
+
+		}).call(this);
+		</script>
+	</body>
+</html>
