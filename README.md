@@ -2,8 +2,9 @@
 
 ... by @jsvine. Somewhere between a total joke and a perhaps-useful library for fetching Vine.co videos.
 
-Because Vine.co doesn't currently have an API, vine.js searches the Twitter API for recent vines, and then parses the results into a handy format.
+Because Vine.co doesn't have a public API right now, vine.js searches the Twitter API for recent vines, and then parses the results into a handy format.
 
+__Note:__ Vine.js uses Twitter's Search API, which is rate limited. Especially if you're using vine.js in the browser, be careful to ration your searches.
 
 ## Usage
 
