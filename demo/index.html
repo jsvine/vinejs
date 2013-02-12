@@ -8,28 +8,31 @@
 		<style>
 			#chooser select {
 				display: block;
-				margin: 0 auto;	
+				margin: 0.5em auto;	
 			}
 			#main {
 				overflow: auto;
 				max-width: 600px;
 				margin: 0 auto;
+				text-align: center;
 			}
 			iframe {
-				padding: 10px;
+				margin: 10px;
 				float: left;
 				width: 180px;
 				height: 180px;
 				border: none;
+				background-color: #EEE;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="chooser">
 			<select>
-				<option val="#cats">#cats</option>
-				<option val="#dogs">#dogs</option>
-				<option val="#cats OR #dogs">#cats OR #dogs</option>
+				<option value='#cats'>#cats</option>
+				<option value='#dogs'>#dogs</option>
+				<option value='#cats OR #dogs'>#cats OR #dogs</option>
+				<option value='{ "geocode": "39.730426,-104.927673,10mi", "q": "cat OR dog" }'>Denver Pets</option>
 			</select>
 		</div>
 		<div id="main"></div>
@@ -42,11 +45,21 @@
 
 			$selector.change(function (e) {
 				var query = $selector.val();
-				var search = new Vine.Search(query, function () {
+				if (query.slice(0,1) == "{") {
+					query = JSON.parse(query);	
+				}
+				var search = new Vine.Search(query);
+				search.fetch(function () {
 					var $iframes = $.map(this.results.slice(0,9), function (r) {
 						return $("<iframe src='" + r.card + "'></iframe>");
 					});
 					$main.html($iframes);
+					if (!this.results.length) {
+						$main.html("No vines found.");	
+					}
+				}, function (e) {
+					console.log(e);
+					$main.html("Error.");	
 				});
 			}).change();
 
