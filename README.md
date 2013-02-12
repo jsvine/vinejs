@@ -26,7 +26,7 @@ And then, to use in either:
 
 ```
 var search = new Vine.Search("#cats");
-var search.fetch(function () {
+search.fetch(function () {
 	console.log(this.results);
 });
 ``` 
@@ -39,6 +39,54 @@ var search = new Vine.Search("#cats", function () {
 });
 ```
 
+## Advanced Usage
+
+Rather than pass a string as the first parameter to `Vine.Search`, you can pass a dictionary of options. These options are drawn from [Twitter's Search API v1](https://dev.twitter.com/docs/api/1/get/search), and default to:
+
+```
+{
+		q: undefined,
+		callback: undefined,
+		geocode: undefined,
+		lang: undefined,
+		locale: undefined,
+		page: undefined,
+		result_type: "recent",
+		rpp: 100,
+		show_user: undefined,
+		until: undefined,
+		since_id: undefined,
+		max_id: undefined,
+		include_entities: true
+}
+```
+
+All parameters are directly passed to Twitter's Search API, with the exception of `q`, which is first converted to "vine.co/v/ AND (`q`)".
+
+So to search for the top-tweeted vines within 10 miles of central Denver:
+
+```
+var search = new Vine.Search({
+	geocode: "39.730426,-104.927673,10mi",
+	result_type: "top"
+});
+
+search.fetch(function () {
+	console.log(this.results);
+}, function (e) {
+	console.log("ERROR!", e);
+});
+``` 
+
+(You can pass an error-handling function as the second parameter to `fetch` or as the third parameter to the `Search` constructor.)
+
+
 ## Thanks
 
 Thanks to [Michael Keller](http://twitter.com/@mhkeller) and [Kate Ray](http://twitter.com/kraykray), who independently both suggested I make this library. They were joking; this is semi-serious.
+
+## TODO
+
+- Add tests.
+- Add a `Search.fetchNext` method.
+- Add package.json and npm module?
