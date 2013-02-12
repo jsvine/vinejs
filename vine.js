@@ -12,7 +12,7 @@
 	// Defaults based on Twitter's search API.
 	// https://dev.twitter.com/docs/api/1/get/search
 	var DEFAULTS = {
-		q: VINE_PATH,
+		q: undefined,
 		callback: undefined,
 		geocode: undefined,
 		lang: undefined,
@@ -59,13 +59,14 @@
 		// Else set opts to itself or an empty object.
 		opts = toString.call(opts) == "[object String]" ? { q: opts } : (opts || {});
 
-		// If we're searching for something -- i.e., not just the latest vines -- add the Vine path to our query.
-		if (opts.q !== undefined) {
-			opts.q = VINE_PATH + " AND (" + opts.q + ")";	
-		}
-
 		// Construct search parameters from defaults and custom options.
-		this.search_params = $.extend({}, DEFAULTS, opts);
+		search_params = $.extend({}, DEFAULTS, opts);
+
+		// If we're searching for something -- i.e., not just the latest vines -- add the Vine path to our query.
+		search_params.q = search_params.q ? VINE_PATH + " AND (" + search_params.q + ")" : VINE_PATH;	
+
+		this.search_params = search_params;
+
 		if (success) {
 			this.fetch(success, error);
 		}
