@@ -79,17 +79,23 @@
 
 			var use_jsonp = root.location ? true : false;
 			// Request JSON from Twitter API
-			$.getJSON(TWITTER_ENDPOINT + (use_jsonp ? "?callback=?" : ""), this.search_params)
-				// Create results objects and pass them to the success function.
-				.success(function (data) {
+			var req = $.ajax({
+				url: TWITTER_ENDPOINT + (use_jsonp ? "?callback=?" : ""),
+				type: "GET",
+				dataType: use_jsonp ? "jsonp" : "json",
+				timeout: use_jsonp ? (this.timeout || 3e3) : undefined,
+				data: this.search_params,
+				success: function (data) {
 					_this.raw = data;
 					// Note: $.map auto-compacts null/undefined array elements. So if Result.parse returns null -- which it does if it can't find a vine.co/v/ URL in a tweet -- then this.results will be shorter than this.raw.results.
 					_this.results = $.map(data.results, function (result) {
 						return new Result(result).parse();
 					});
 					success.call(_this);
-				})
-				.error(error);
+				},
+				error: error
+			});
+
 			return this;
 		}
 	};
