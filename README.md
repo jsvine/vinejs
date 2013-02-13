@@ -73,8 +73,8 @@ var search = new Vine.Search({
 
 search.fetch(function () {
 	console.log(this.results);
-}, function (e) {
-	console.log("ERROR!", e);
+}, function (jqXHR, textStatus, errorThrown) {
+	console.log("ERROR:", textStatus);
 });
 ``` 
 
