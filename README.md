@@ -1,6 +1,6 @@
 # vine.js
 
-... by @jsvine. Somewhere between a total joke and a perhaps-useful library for fetching Vine.co videos.
+... by @jsvine. Somewhere between a total joke and a useful library for fetching Vine.co videos.
 
 Because Vine.co doesn't have a public API right now, vine.js searches the Twitter API for recent vines, and then parses the results into a handy format.
 
@@ -8,7 +8,7 @@ __Note:__ Vine.js uses Twitter's Search API, which is rate limited. Especially i
 
 ## Demo
 
-[Click here for a basic demo](http://www.jsvine.com/vinejs/demo/).
+[Click here for a basic demo.](http://www.jsvine.com/vinejs/demo/)
 
 ## Usage
 
@@ -45,7 +45,7 @@ var search = new Vine.Search("#cats", function () {
 
 ## Advanced Usage
 
-Rather than pass a string as the first parameter to `Vine.Search`, you can pass a dictionary of options. These options are drawn from [Twitter's Search API v1](https://dev.twitter.com/docs/api/1/get/search), and default to:
+Rather than pass a string as the first parameter to `Vine.Search`, you can pass a dictionary of options. These options are drawn from [Twitter's Search API (v1)](https://dev.twitter.com/docs/api/1/get/search) and default to:
 
 ```
 {
@@ -72,7 +72,7 @@ So to search for the top-tweeted vines within 10 miles of central Denver:
 ```
 var search = new Vine.Search({
 	geocode: "39.730426,-104.927673,10mi",
-	result_type: "top"
+	result_type: "popular"
 });
 
 search.fetch(function () {
@@ -87,7 +87,7 @@ search.fetch(function () {
 
 ## Thanks
 
-Thanks to [Michael Keller](http://twitter.com/@mhkeller) and [Kate Ray](http://twitter.com/kraykray), who independently both suggested I make this library. They were joking; this is semi-serious.
+Thanks to [Michael Keller](http://twitter.com/@mhkeller) and [Kate Ray](http://twitter.com/kraykray) for pseudo-goading me into this. They were joking; this is semi-serious.
 
 ## TODO
 
