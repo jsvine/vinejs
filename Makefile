@@ -8,3 +8,6 @@ jshint:
 
 s3:
 	s3cmd sync -P --delete-removed --exclude={.git/*,node_modules/*} . s3://www.jsvine.com/vinejs/
+
+vine.min.js: vine.js
+	uglifyjs < vine.js > vine.min.js
