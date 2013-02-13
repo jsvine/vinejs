@@ -1,3 +1,7 @@
+//     vine.js 0.0.1 -- by @jsvine
+//     https://github.com/jsvine/vinejs
+//     vine.js may be freely distributed under the MIT license.
+
 (function ($) {
 	var root = this;
 	var previousVine = root.Vine;
