@@ -6,6 +6,10 @@ Because Vine.co doesn't have a public API right now, vine.js searches the Twitte
 
 __Note:__ Vine.js uses Twitter's Search API, which is rate limited. Especially if you're using vine.js in the browser, be careful to ration your searches.
 
+## Demo
+
+[Click here for a basic demo](http://www.jsvine.com/vinejs/demo/).
+
 ## Usage
 
 Vine.js should work in both the browser and Node.js. In either case, the library depends on jQuery.
