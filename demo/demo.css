@@ -1,0 +1,56 @@
+body {
+	font-family: Helvetica, sans-serif;
+	font-size: 10px;
+	color: #333;
+}
+
+#main {
+	overflow: auto;
+	max-width: 600px;
+	margin: 0 auto;
+	margin-bottom: 2em;
+}
+
+#note {
+	font-size: 2em;
+	line-height: 1.5;
+}
+
+.example {
+	font-size: 1.2em;	
+	padding: 1em 0;
+	margin-top: 1em;
+	border-top: 1px solid #CCC;
+}
+
+.example .explanation {
+	font-weight: bold;
+}
+
+.example .code {
+	white-space: pre;	
+	font-family: monospace;
+	padding: 0.5em 1em;
+	margin: 0.5em 0;
+	background-color: #EEE;
+}
+
+.example .results {
+	overflow: auto;
+}
+
+.error {
+	margin: 0.5em 0.25em;
+	font-weight: bold;
+}
+
+iframe {
+	padding: 5px;
+	margin: 5px;
+	float: left;
+	width: 180px;
+	height: 180px;
+	border: none;
+	background-color: #000;
+}
+

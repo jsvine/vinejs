@@ -5,65 +5,47 @@
 		<title>vine.js demo</title>
 		<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA1BMVEV/y+Bw0/5KAAAADElEQVQImWNgIA0AAAAwAAFDlLdnAAAAAElFTkSuQmCC" />
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-		<style>
-			#chooser select {
-				display: block;
-				margin: 0.5em auto;	
-			}
-			#main {
-				overflow: auto;
-				max-width: 600px;
-				margin: 0 auto;
-				text-align: center;
-			}
-			iframe {
-				margin: 10px;
-				float: left;
-				width: 180px;
-				height: 180px;
-				border: none;
-				background-color: #EEE;
-			}
-		</style>
+		<link rel="stylesheet" media="screen" href="demo.css"/>
 	</head>
 	<body>
-		<div id="chooser">
-			<select>
-				<option value='#cats'>#cats</option>
-				<option value='#dogs'>#dogs</option>
-				<option value='#cats OR #dogs'>#cats OR #dogs</option>
-				<option value='{ "geocode": "39.730426,-104.927673,10mi", "q": "cat OR dog" }'>Denver Pets</option>
-			</select>
+		<div id="main">
+			<div id="note">
+			This is a demonstration of <a href="https://github.com/jsvine/vinejs">vine.js</a> by <a href="http://twitter.com/jsvine">@jsvine</a>.
+			</div>
+			<div id="examples">
+				<div class="example">
+					<div class="explanation">Recent vines tagged "#cats" on Twitter.</div>
+					<div class="code">var search = new Vine.Search("#cats");</div>
+					<div class="go"><button>search.fetch()</button></div>
+					<div class="results"></div>
+				</div>
+				<div class="example">
+					<div class="explanation">Recent vines tagged "#cats" or "#dogs" on Twitter.</div>
+					<div class="code">var search = new Vine.Search("#cats OR #dogs");</div>
+					<div class="go"><button>search.fetch()</button></div>
+					<div class="results"></div>
+				</div>
+				<div class="example">
+					<div class="explanation">Recent cats and dogs within 10 miles of downtown Denver.</div>
+					<div class="code">var search = new Vine.Search({
+	q: "cat OR dog",
+	geocode: "39.730426,-104.927673,10mi"
+});</div>
+					<div class="go"><button>search.fetch()</button></div>
+					<div class="results"></div>
+				</div>
+				<div class="example">
+					<div class="explanation">Vines mentioning "biden" before February 14, 2013.</div>
+					<div class="code">var search = new Vine.Search({
+	q: "biden",
+	until: "2013-02-14"
+});</div>
+					<div class="go"><button>search.fetch()</button></div>
+					<div class="results"></div>
+				</div>
+			</div>
 		</div>
-		<div id="main"></div>
-
 		<script src="../vine.js"></script>
-		<script>
-		(function () {
-			var $main = $("#main");
-			var $selector = $("#chooser select");
-
-			$selector.change(function (e) {
-				var query = $selector.val();
-				if (query.slice(0,1) == "{") {
-					query = JSON.parse(query);	
-				}
-				var search = new Vine.Search(query);
-				search.fetch(function () {
-					var $iframes = $.map(this.results.slice(0,9), function (r) {
-						return $("<iframe src='" + r.card + "'></iframe>");
-					});
-					$main.html($iframes);
-					if (!this.results.length) {
-						$main.html("No vines found.");	
-					}
-				}, function (e) {
-					console.log(e);
-					$main.html("Error.");	
-				});
-			}).change();
-
-		}).call(this);
-		</script>
+		<script src="demo.js"></script>
 	</body>
 </html>
