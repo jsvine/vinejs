@@ -1,3 +1,4 @@
+/*jshint evil:true*/
 (function () {
 	var $main = $("#main");
 
