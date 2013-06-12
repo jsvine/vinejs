@@ -1,3 +1,5 @@
+### UPDATE June 12, 2013: The current version of vine.js depends on Twitter's API v1, [which no longer works](http://thenextweb.com/twitter/2013/06/12/twitter-retires-api-v1-finally-killing-off-tweetdeck-for-ios-android-air-and-other-apps/). I'll try to make vine.js work on API v1.1, but I can't guarantee it will happen. Suggestions and pull requests welcome.
+
 # vine.js
 
 ... by @jsvine. Somewhere between a total joke and a useful library for fetching Vine.co videos.
